@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "MyOS Downloader",
+    "version": "1.0",
+    "description": "Download MyOS from the address bar",
+    "permissions": [
+      "downloads"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_icon": "icon.png"
+    }
+  }
+  

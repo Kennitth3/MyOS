@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background:white;
+        }
+    </style>
+</head>
+<body>
+    <button id="youtubeBtn">Youtube</button>
+        <button id="vscodeBtn">Vscode</button>
+        <button id="monosBtn">Mon OS</button>
+        <button onclick="power()">Power</button>
+
+        <div id="iframeContainer">
+            <iframe id="myIframe" src="" frameborder="0"></iframe>
+        </div>
+    <script>
+                document.getElementById("youtubeBtn").addEventListener("click", function() {
+            var iframeContainer = document.getElementById("iframeContainer");
+            var iframe = document.getElementById("myIframe");
+            iframeContainer.style.display = "block";
+            iframe.src = "https://www.youtube.com";
+        });
+    
+        document.getElementById("vscodeBtn").addEventListener("click", function() {
+            var iframeContainer = document.getElementById("iframeContainer");
+            var iframe = document.getElementById("myIframe");
+            iframeContainer.style.display = "block";
+            iframe.src = "https://vscode.dev";
+        });
+
+        document.getElementById("monosBtn").addEventListener("click", function() {
+            var iframeContainer = document.getElementById("iframeContainer");
+            var iframe = document.getElementById("myIframe");
+            iframeContainer.style.display = "block";
+            iframe.src = "https://kennitth.github.io/My-code-editor-beta-2/";
+        });
+
+        function power() {
+            var iframeContainer = document.getElementById("iframeContainer");
+            var iframe = document.getElementById("myIframe");
+            iframeContainer.style.display = "block";
+            iframe.src = "power.html";
+        }
+    </script>
+</body>
+</html>

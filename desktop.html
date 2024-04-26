@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop</title>
+    <style>
+        body {
+            background-image: url(pexels-photo-268533.webp);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+        }
+
+        .taskbar {
+            background-color: #333;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #iframeContainer {
+            display: none;
+            width: 100%;
+            height: 400px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+
+        #myIframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .exit:hover {
+            background-color:red;
+            cursor:pointer
+        }
+
+        /* New styles for selection area */
+        #selectionArea {
+            position: absolute;
+            border: 1px dashed #791717;
+            background-color: rgba(65, 18, 18, 0.5);
+            z-index: 1000;
+            pointer-events: none; /* Allows pointer events to go through the selection area */
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const iframeContainer = document.getElementById("iframeContainer");
+            const iframe = document.getElementById("myIframe");
+            const selectionArea = document.getElementById("selectionArea");
+            const exitBtn = document.querySelector(".exit");
+            const fullscreen = document.querySelector(".fullscreen")
+
+            // Function to open iframe with specified source
+            function openIframe(url) {
+                iframeContainer.style.display = "block";
+                iframe.src = url;
+            }
+
+            // Event delegation for taskbar buttons
+            document.querySelector(".taskbar").addEventListener("click", function(event) {
+                const target = event.target;
+                if (target.matches("#menuBtn")) {
+                    openIframe("menu.html");
+                } else if (target.matches("#youtubeBtn")) {
+                    openIframe("https://www.youtube.com");
+                } else if (target.matches("#vscodeBtn")) {
+                    openIframe("https://vscode.dev");
+                } else if (target.matches("#quicksettingsBtn")) {
+                    openIframe("settings.html");
+                } else if (target.matches("#power")) {
+                    openIframe("power.html");
+                } else if (target.matches("#MonOS")) {
+                    openIframe("https://kennitth.github.io/My-code-editor-beta-2/");
+                }
+            });
+
+            // Function to update battery percentage
+            function updateBatteryPercentage() {
+                navigator.getBattery().then(function(battery) {
+                    const percentage = Math.floor(battery.level * 100);
+                    document.getElementById("battery").textContent = "Battery: " + percentage + "%";
+                });
+            }
+
+            updateBatteryPercentage();
+
+            // Drag and select functionality
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            iframe.onmousedown = function(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+                selectionArea.style.left = e.clientX + 1 + "px";
+                selectionArea.style.top = e.clientY + 1 + "px";
+                selectionArea.style.width = "1px";
+                selectionArea.style.height = "1px";
+                selectionArea.style.display = "block";
+            };
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                const width = e.clientX - pos3;
+                const height = e.clientY - pos4;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                selectionArea.style.width = width + "px";
+                selectionArea.style.height = height + "px";
+                const elements = document.elementsFromPoint(e.clientX, e.clientY);
+                elements.forEach(element => {
+                    if (element.tagName === "BUTTON") {
+                        console.log("Selected button:", element.textContent);
+                    }
+                });
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+                selectionArea.style.display = "none";
+            }
+
+            // Close iframe
+            exitBtn.addEventListener("click", function() {
+                iframe.src = "";
+                iframeContainer.style.display = "none";
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="taskbar">
+        <button id="menuBtn">Menu</button>
+        <button id="youtubeBtn">Youtube</button>
+        <button id="vscodeBtn">Vscode</button>
+        <button id="MonOS">Mon OS</button>
+        <button id="quicksettingsBtn">Quick Settings</button>
+        <span id="battery">Battery</span>
+        <button id="power">Power</button>
+    </div>
+
+    <div id="iframeContainer">
+        <iframe id="myIframe" src="" frameborder="0"></iframe>
+        <button class="exit">X</button>
+    </div>
+
+    <!-- New selection area -->
+    <div id="selectionArea"></div>
+</body>
+</html>

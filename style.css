@@ -1,0 +1,17 @@
+body {
+    background-image: url(pexels-photo-268533.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 100%;
+}
+
+h1 {
+    color:aqua;
+    text-align:center;
+}
+
+.desktop {
+    width:10000000000px;
+    height:10000000000px;
+    opacity: 0%;
+}

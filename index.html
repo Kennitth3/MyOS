@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="boot-up">MyOS</h1>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  const bootDuration = 4000; // 4 seconds
+  let elapsedTime = 0;
+
+  // Function to change the size of the h1 element
+  function changeHeadingSize() {
+    const heading = document.querySelector("#boot-up");
+    const fontSize = 24 + elapsedTime / 1000 * 8; // Increase font size every second
+
+    heading.style.fontSize = fontSize + "px";
+  }
+
+  // Interval to change heading size every second until 4 seconds
+  const interval = setInterval(function() {
+    changeHeadingSize();
+    elapsedTime += 1000;
+
+    // If 4 seconds have passed, clear the interval
+    if (elapsedTime >= bootDuration) {
+      clearInterval(interval);
+      // Redirect to the new HTML file after 4 seconds
+      setTimeout(function() {
+        window.location.href = "myOS.html";
+      }, 1000);
+    }
+  }, 1000);
+});
+
+    </script>
+</body>
+</html>

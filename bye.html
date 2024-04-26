@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shutting Down</title>
+    <style>
+        body {
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shutting Down</h1>
+    <progress id="progressBar" max="100"></progress> <!-- Added max attribute to specify the maximum value of the progress bar -->
+    <script>
+        function redirectToNewWebsite() {
+            window.location.href = "index.html"; // Replace "index.html" with your desired URL
+        }
+
+        var minDelay = 30000; // 30 seconds
+        var maxDelay = 300000; // 5 minutes
+        var randomDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+
+        // Set a timeout to execute the redirect function after the random delay
+        setTimeout(redirectToNewWebsite, randomDelay);
+
+        // Update progress bar
+        var progressBar = document.getElementById('progressBar');
+        var timeElapsed = 0;
+        var updateInterval = 1000; // 1 second
+
+        function updateProgress() {
+            timeElapsed += updateInterval;
+            var progressValue = (timeElapsed / randomDelay) * 100;
+            progressBar.value = progressValue;
+        }
+
+        setInterval(updateProgress, updateInterval);
+    </script>
+</body>
+</html>
