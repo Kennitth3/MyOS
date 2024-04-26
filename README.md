@@ -5,7 +5,7 @@
 <h1>This is an operating system for the web and its in beta 2</h1>
 <h1>here are the features</h1>  
 <ol>
-<l1>exit button</l1>
+<li>exit button</li>
 <li>desktop</li>
 <li>apps some might not work...</li>
 </ol>
