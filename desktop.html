@@ -141,6 +141,10 @@
                 iframe.src = "";
                 iframeContainer.style.display = "none";
             });
+
+            fullscreen.addEventListener("click", function() {
+                iframe.requestFullscreen;
+            });
         });
     </script>
 </head>
@@ -157,8 +161,9 @@
     </div>
 
     <div id="iframeContainer">
-        <iframe id="myIframe" src="" frameborder="0"></iframe>
+        <iframe id="myIframe" allowfullscreen src="" frameborder="0"></iframe>
         <button class="exit">X</button>
+        <button class="fullscreen">O</button>
     </div>
 
     <!-- New selection area -->
