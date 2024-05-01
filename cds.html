@@ -19,6 +19,10 @@
     help: function(command) {
         if (command === "echo") {
             this.echo("just normal echo command");
+        } else if (command == "hello") {
+            this.echo("This will have a small word...");
+        } else {
+            this.echo("The commands are listed above: help, hello, echo");
         };
     }
 }, {
