@@ -15,19 +15,21 @@
     $(document).ready(function() {
       $('#terminal').terminal(function(command, term) {
         command = command.trim();
-        switch (command) {
+        var parts = command.split(/\s+/); // Split by whitespace
+        var cmd = parts[0];
+        var args = parts.slice(1);
+
+        switch (cmd) {
           case 'help':
             term.echo('Commands available:');
             term.echo('- help: Display this help message');
             term.echo('- date: Display current date and time');
+            term.echo('- echo [text]: Display the given text');
             break;
           case 'date':
             term.echo(new Date().toLocaleString());
             break;
-            case 'hello':
-                this.echo('Hello world!');
-            break;
-            case 'echo':
+          case 'echo':
             if (args.length === 0) {
               term.echo('Usage: echo [text]');
             } else {
