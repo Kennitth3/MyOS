@@ -29,9 +29,9 @@
             break;
             case 'echo':
             if (args.length === 0) {
-                term.echo('echo is on');
+              term.echo('Usage: echo [text]');
             } else {
-                term.echo(args.join(''));
+              term.echo(args.join(' '));
             }
             break;
           default:
