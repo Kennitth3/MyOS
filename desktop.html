@@ -79,6 +79,7 @@
             const iframe = document.getElementById("myIframe");
             const selectionArea = document.getElementById("selectionArea");
             const exitBtn = document.querySelector(".exit");
+            const menuex = document.querySelector(".menuex")
             const fullscreen = document.querySelector(".fullscreen")
 
             // Function to open iframe with specified source
@@ -169,7 +170,7 @@
                 iframeContainer.style.display = "none";
             });
 
-            menuext.addEventListener("click", function() {
+            menuex.addEventListener("click", function() {
                 iframe.src = "";
                 menuIframeContaner.style.display = "none";
             });
