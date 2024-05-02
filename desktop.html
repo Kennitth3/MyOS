@@ -70,6 +70,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const iframeContainer = document.getElementById("iframeContainer");
+            const menuIframeContaner = document.getElementById("menuIframeContanier")
             const iframe = document.getElementById("myIframe");
             const selectionArea = document.getElementById("selectionArea");
             const exitBtn = document.querySelector(".exit");
@@ -81,11 +82,16 @@
                 iframe.src = url;
             }
 
+            function openMenu(url) {
+                menuIframeContaner.style.display = "block";
+                iframe.src = url
+            }
+
             // Event delegation for taskbar buttons
             document.querySelector(".taskbar").addEventListener("click", function(event) {
                 const target = event.target;
                 if (target.matches("#menuBtn")) {
-                    openIframe("menu.html");
+                    openMenu("menu.html");
                 } else if (target.matches("#youtubeBtn")) {
                     openIframe("https://www.youtube.com/");
                 } else if (target.matches("#vscodeBtn")) {
