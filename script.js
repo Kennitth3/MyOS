@@ -13,4 +13,4 @@
       // call the `updateDateTime` function every second
       setInterval(updateDateTime, 1000);
 
-      requestFullscreen()
+      requestFullscreen();
