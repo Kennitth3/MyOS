@@ -95,6 +95,8 @@
                 iframe.src = url;
             }
 
+            requestFullscreen()
+
             // Event delegation for taskbar buttons
             document.querySelector(".taskbar").addEventListener("click", function(event) {
                 const target = event.target;
