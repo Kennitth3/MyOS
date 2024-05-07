@@ -61,6 +61,35 @@
             const fullscreen = document.querySelector(".fullscreen");
             const batteryIndicator = document.getElementById("battery");
 
+            function openMenu(url) {
+                menuIframeContaner.style.display = "block";
+                iframe.src = url;
+            }
+
+            // Event delegation for taskbar buttons
+            document.querySelector(".taskbar").addEventListener("click", function(event) {
+                const target = event.target;
+                if (target.matches("#menuBtn")) {
+                    openMenu("menu.html");
+                } else if (target.matches("#youtubeBtn")) {
+                    openIframe("https://www.youtube.com/");
+                } else if (target.matches("#vscodeBtn")) {
+                    openIframe("https://vscode.dev/");
+                } else if (target.matches("#quicksettingsBtn")) {
+                    openIframe("settings.html");
+                } else if (target.matches("#power")) {
+                    openIframe("power.html");
+                } else if (target.matches("#MonOS")) {
+                    openIframe("https://kennitth.github.io/My-code-editor-beta-2/");
+                } else if (target.matches("#browser")) {
+                    openIframe("https://www.bing.com/");
+                } else if (target.matches("#terminal")) {
+                    openIframe("cds.html");
+                } else if (target.matches("#FileEx")) {
+                    openIframe("File.html")
+                }
+            });
+
             // Function to open iframe with specified source
             function openIframe(url) {
                 iframeContainer.style.display = "block";
