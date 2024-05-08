@@ -3,88 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Platformer Game</title>
+<title>Platformer Game</title>
 <style>
-    body {
-        margin: 0;
-        overflow: hidden;
-    }
-    canvas {
-        display: block;
-        background-color: #87CEEB;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  #player {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: 0.2s;
+  }
 </style>
 </head>
 <body>
-<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<div id="player"></div>
+
 <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    const player = {
-        x: 50,
-        y: canvas.height - 100,
-        width: 50,
-        height: 50,
-        speed: 5,
-        jumping: false,
-        jumpStrength: 10,
-        velocityY: 0
-    };
+  const player = document.getElementById('player');
+  let isJumping = false;
+  let isCrouching = false;
 
-    const ground = {
-        x: 0,
-        y: canvas.height - 50,
-        width: canvas.width,
-        height: 50
-    };
+  function moveLeft() {
+    const leftPos = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+    player.style.left = (leftPos - 10) + 'px';
+  }
 
-    function drawPlayer() {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(player.x, player.y, player.width, player.height);
-    }
+  function moveRight() {
+    const leftPos = parseInt(window.getComputedStyle(player).getPropertyValue('left'));
+    player.style.left = (leftPos + 10) + 'px';
+  }
 
-    function drawGround() {
-        ctx.fillStyle = 'green';
-        ctx.fillRect(ground.x, ground.y, ground.width, ground.height);
-    }
-
-    function update() {
-        if (player.jumping) {
-            player.velocityY += 0.5; // gravity
-            player.y += player.velocityY;
-            if (player.y + player.height >= ground.y) {
-                player.y = ground.y - player.height;
-                player.jumping = false;
-                player.velocityY = 0;
+  function jump() {
+    if (!isJumping) {
+      isJumping = true;
+      let jumpCount = 0;
+      const jumpInterval = setInterval(() => {
+        const bottomPos = parseInt(window.getComputedStyle(player).getPropertyValue('bottom'));
+        if (bottomPos >= 200) {
+          clearInterval(jumpInterval);
+          const fallInterval = setInterval(() => {
+            const bottomPos = parseInt(window.getComputedStyle(player).getPropertyValue('bottom'));
+            if (bottomPos <= 0) {
+              clearInterval(fallInterval);
+              isJumping = false;
+            } else {
+              player.style.bottom = (bottomPos - 5) + 'px';
             }
+          }, 10);
+        } else {
+          player.style.bottom = (bottomPos + 5) + 'px';
         }
-    }
-
-    function clearCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function draw() {
-        clearCanvas();
-        drawPlayer();
-        drawGround();
-    }
-
-    function loop() {
-        update();
-        draw();
-        requestAnimationFrame(loop);
-    }
-
-    loop();
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowUp' && !player.jumping) {
-            player.jumping = true;
-            player.velocityY = -player.jumpStrength;
+        jumpCount++;
+        if (jumpCount >= 20) {
+          clearInterval(jumpInterval);
         }
-    });
+      }, 10);
+    }
+  }
+
+  function crouch() {
+    if (!isCrouching) {
+      player.style.height = '30px';
+      isCrouching = true;
+    } else {
+      player.style.height = '50px';
+      isCrouching = false;
+    }
+  }
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') {
+      moveLeft();
+    }
+    if (event.key === 'ArrowRight') {
+      moveRight();
+    }
+    if (event.key === 'ArrowUp') {
+      jump();
+    }
+    if (event.key === 'ArrowDown') {
+      crouch();
+    }
+  });
 </script>
+
 </body>
 </html>
