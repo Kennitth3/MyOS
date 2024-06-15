@@ -11,42 +11,13 @@
     </style>
 </head>
 <body>
-    <button id="youtubeBtn">Youtube</button>
-        <button id="vscodeBtn">Vscode</button>
-        <button id="monosBtn">Mon OS</button>
-        <button onclick="power()">Power</button>
-
-        <div id="iframeContainer">
-            <iframe id="myIframe" src="" frameborder="0"></iframe>
-        </div>
-    <script>
-                document.getElementById("youtubeBtn").addEventListener("click", function() {
-            var iframeContainer = document.getElementById("iframeContainer");
-            var iframe = document.getElementById("myIframe");
-            iframeContainer.style.display = "block";
-            iframe.src = "https://www.youtube.com";
-        });
-    
-        document.getElementById("vscodeBtn").addEventListener("click", function() {
-            var iframeContainer = document.getElementById("iframeContainer");
-            var iframe = document.getElementById("myIframe");
-            iframeContainer.style.display = "block";
-            iframe.src = "https://vscode.dev";
-        });
-
-        document.getElementById("monosBtn").addEventListener("click", function() {
-            var iframeContainer = document.getElementById("iframeContainer");
-            var iframe = document.getElementById("myIframe");
-            iframeContainer.style.display = "block";
-            iframe.src = "https://kennitth.github.io/My-code-editor-beta-2/";
-        });
-
-        function power() {
-            var iframeContainer = document.getElementById("iframeContainer");
-            var iframe = document.getElementById("myIframe");
-            iframeContainer.style.display = "block";
-            iframe.src = "power.html";
-        }
-    </script>
+    <button onclick="window.location.href='https://www.youtube.com'">YouTube</button>
+    <button onclick="window.location.href='store.html'">MyOS Store</button>
+    <button onclick="window.location.href='cds.html'">Cds</button>
+    <button onclick="window.location.href='File.html'">FileEXS</button>
+    <button onclick="window.location.href='browsermenu.html'">BrowserMenu</button>
+    <button onclick="window.location.href='game.html'">Game 1</button>
+    <button onclick="window.location.href='https://vscode.dev'">Vscode</button>
+    <button onclick="window.location.href='https://kennitth.github.io/My-code-editor-beta-2/'">MonOS</button>
 </body>
 </html>
