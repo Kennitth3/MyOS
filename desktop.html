@@ -32,7 +32,7 @@
             left: 0;
         }
 
-        #menuIframeContaner {
+        #Iframe2Contaner {
             display:none;
             width:30%;
             height:14%;
@@ -80,22 +80,20 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const iframeContainer = document.getElementById("iframeContainer");
+            const iframe2Container = document.getElementById("iframe2Container");
             const iframe = document.getElementById("myIframe");
             const selectionArea = document.getElementById("selectionArea");
             const exitBtn = document.querySelector(".exit");
             const fullscreen = document.querySelector(".fullscreen");
             const batteryIndicator = document.getElementById("battery");
 
-            function openMenu(url) {
-                menuIframeContaner.style.display = "block";
-                iframe.src = url;
-            }
+            
 
             // Event delegation for taskbar buttons
             document.querySelector(".taskbar").addEventListener("click", function(event) {
                 const target = event.target;
                 if (target.matches("#menuBtn")) {
-                    openIframe("menu.html");
+                    openIframe2("menu.html");
                 } else if (target.matches("#youtubeBtn")) {
                     openIframe("https://www.youtube.com/");
                 } else if (target.matches("#vscodeBtn")) {
@@ -122,6 +120,11 @@
             // Function to open iframe with specified source
             function openIframe(url) {
                 iframeContainer.style.display = "block";
+                iframe.src = url;
+            }
+
+            function openIframe2(url) {
+                iframe2Container.style.display = "block";
                 iframe.src = url;
             }
 
