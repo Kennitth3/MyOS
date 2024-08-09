@@ -68,14 +68,6 @@
             pointer-events: none; /* Allows pointer events to go through the selection area */
             display: none;
         }
-
-        img {
-            width:60px;
-        }
-
-        img:hover {
-            width:70px;
-        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -95,7 +87,7 @@
             document.querySelector(".taskbar").addEventListener("click", function(event) {
                 const target = event.target;
                 if (target.matches("#menuBtn")) {
-                    openIframe("menu.html");
+                    openMenu("menu.html");
                 } else if (target.matches("#youtubeBtn")) {
                     openIframe("https://www.youtube.com/");
                 } else if (target.matches("#vscodeBtn")) {
@@ -107,15 +99,13 @@
                 } else if (target.matches("#MonOS")) {
                     openIframe("https://kennitth.github.io/My-code-editor-beta-2/");
                 } else if (target.matches("#browser")) {
-                    openIframe("browsermenu.html");
+                    openIframe("https://www.bing.com/");
                 } else if (target.matches("#terminal")) {
                     openIframe("cds.html");
                 } else if (target.matches("#FileEx")) {
                     openIframe("File.html")
                 } else if (target.matches("#game")) {
                     openIframe("game.html")
-                } else if (target.matches("#store")) {
-                    openIframe("store.html")
                 }
             });
 
@@ -201,18 +191,17 @@
 </head>
 <body>
     <div class="taskbar">
-        <img src="Untitled_design-removebg-preview.png" id="menuBtn">
-        <img src="youtube.png" id="youtubeBtn">
-        <img src="vscode.svg" id="vscodeBtn">
+        <button id="menuBtn">Menu</button>
+        <button id="youtubeBtn">Youtube</button>
+        <button id="vscodeBtn">Vscode</button>
         <button id="game">Game 1</button>
-        <button id="browser">Browsers</button>
+        <button id="browser">Bing</button>
         <button id="MonOS">Mon OS</button>
         <button id="FileEx">FileEXS</button>
         <button id="terminal">Cds</button>
-        <img src="Untitled_design__1_-removebg-preview.png" id="store">
-        <img src="settings icon.png" id="quicksettingsBtn">
+        <button id="quicksettingsBtn">Quick Settings</button>
         <span id="battery">Battery</span>
-        <img src="power button.png" id="power">
+        <button id="power">Power</button>
     </div>
 
     <div id="iframeContainer">
