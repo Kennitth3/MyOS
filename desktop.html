@@ -113,16 +113,6 @@
             function openIframe(url) {
                 iframeContainer.style.display = "block";
                 iframe.src = url;
-                            $(".draggable").draggable({
-  handle: ".handle",
-  iframeFix: true,
-  start: function(event, ui) {
-    $('.frameOverlay').show();
-  },
-  stop: function(event, ui) {
-    $(".frameOverlay").hide();
-  }
-});
             }
 
             // Function to update battery percentage
