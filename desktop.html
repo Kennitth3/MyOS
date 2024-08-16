@@ -117,7 +117,9 @@
                 if (target.matches("#menuBtn")) {
                     addIframe("menu.html");
                 } else if (target.matches("#youtubeBtn")) {
-                    addIframe("https://www.youtube.com/");
+                    new WinBox("WinBox.js", {
+    url: "https://nextapps-de.github.io/winbox/"
+});
                 } else if (target.matches("#vscodeBtn")) {
                     addIframe("https://vscode.dev/");
                 } else if (target.matches("#quicksettingsBtn")) {
