@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <link rel="stylesheet" href="dist/css/winbox.min.css">
-        <script src="dist/js/winbox.min.js"></script>
+        <script src="dist/js/winbox.bundle.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desktop</title>
@@ -119,7 +119,7 @@
                 } else if (target.matches("#youtubeBtn")) {
                     new WinBox("WinBox.js", {
     url: "https://nextapps-de.github.io/winbox/"
-});
+        });
                 } else if (target.matches("#vscodeBtn")) {
                     addIframe("https://vscode.dev/");
                 } else if (target.matches("#quicksettingsBtn")) {
