@@ -117,9 +117,7 @@
                 if (target.matches("#menuBtn")) {
                     addIframe("menu.html");
                 } else if (target.matches("#youtubeBtn")) {
-                    new WinBox("WinBox.js", {
-    url: "https://nextapps-de.github.io/winbox/"
-        });
+                    
                 } else if (target.matches("#vscodeBtn")) {
                     addIframe("https://vscode.dev/");
                 } else if (target.matches("#quicksettingsBtn")) {
@@ -190,7 +188,7 @@
 <body>
     <div class="taskbar">
         <button id="menuBtn">Menu</button>
-        <button id="youtubeBtn">Youtube</button>
+        <button id="youtubeBtn" win>Youtube</button>
         <button id="vscodeBtn">Vscode</button>
         <button id="game">Game 1</button>
         <button id="browser">Bing</button>
