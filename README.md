@@ -12,5 +12,4 @@
 <li>apps some might not work...</li>
 </ol>
 
-<h1>And i will be repeatingly updating the OS!</h1>
-<h1>Also the browser which is a search engine called bing made this OS almost OP</h1>
+<h1>And i will be frequently updating the OS!</h1>
