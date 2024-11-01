@@ -46,7 +46,7 @@
             border: none;
         }
 
-        .exit, .fullscreen {
+        .fullscreen {
             position: absolute;
             top: 5px;
             right: 5px;
@@ -58,11 +58,22 @@
         }
 
         .exit {
-            background-color: red;
+            position:absolute;
+            top:5px;
+            right:3px;
+            background-color:white;
+            border:none;
+            padding: 5px;
+            cursor:pointer;
+            z-index: 10;
         }
 
-        .fullscreen {
+        .fullscreen:hover {
             background-color: green;
+        }
+
+        .exit:hover {
+            background-color:red;
         }
 
         /* New styles for selection area */
