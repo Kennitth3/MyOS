@@ -16,17 +16,24 @@
         this.echo("Hello world!");
     },
 
+    exit: function() {
+        this.clear();
+        this.set_prompt('');
+    },
+
     help: function(command) {
         if (command === "echo") {
             this.echo("just normal echo command");
         } else if (command == "hello") {
             this.echo("This will have a small word...");
+        } else if (command == "exit") {
+            this.echo("exits the terminal");
         } else {
-            this.echo("The commands are listed above: help, hello, echo");
+            this.echo("Here are the commands: help, exit, hello, echo");
         };
     }
 }, {
-    greetings: 'My First Web Terminal'
+    greetings: ''
 });
     </script>
 </body>
