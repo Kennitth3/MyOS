@@ -18,8 +18,8 @@
 
     exit: function() {
         this.clear();
-        this.set_prompt('');
-        window.close();
+        this.set_prompt('Exiting...');
+        iframeContainer.removeChild(iframeWrapper);
     },
 
     help: function(command) {
