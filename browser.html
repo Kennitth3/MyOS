@@ -1,29 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GESAR</title>
-    <style>
-        body {
-            background-image: linear-gradient(to left, red, green);
-            text-align:center;
-        }
-
-        .main {
-            background-color:hotpink;
-            width:90px;
-        }
-
-        .search {
-            border:2%;
-            background-image: linear-gradient(to right, blue, orange);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>🌸 Sunflow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      color: #fff;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background 0.5s ease;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    header {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      animation: pulse 3s infinite alternate;
+    }
+    @keyframes pulse {
+      from { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+      to { text-shadow: 0 0 30px rgba(255,255,255,1); }
+    }
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem;
+    }
+    .controls button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      background: #ffb347;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    .controls button:hover { transform: scale(1.05); }
+    .search-bar {
+      display: flex;
+      margin: 1rem 0;
+    }
+    .search-bar input {
+      padding: 0.75rem;
+      border-radius: 10px 0 0 10px;
+      border: none;
+      width: 300px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0 10px 10px 0;
+      background: #ff758c;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .search-bar button:hover { transform: scale(1.05); }
+    .site-entry {
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.5s ease;
+      width: 90%;
+      max-width: 700px;
+    }
+    .site-entry h3 { margin: 0 0 0.25rem 0; }
+    .site-entry a { color: #ffe082; text-decoration: none; }
+    .site-entry a:hover { text-decoration: underline; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      display: none;
+      z-index: 1000;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .popup input, .popup select {
+      margin: 5px 0;
+      padding: 6px;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+    .popup button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #ff758c;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <script async src="https://cse.google.com/cse.js?cx=804133759f2d6470f">
-</script>
-<div class="gcse-searchbox"></div>
+  <header>
+    <h1>🌸 Sunflow</h1>
+    <p>Community-powered search engine</p>
+  </header>
+
+  <div class="controls">
+    <button onclick="openPopup('addSitePopup')">➕ Add Site</button>
+    <button onclick="openPopup('settingsPopup')">⚙️ Customize</button>
+    <button onclick="openPopup('helpPopup')">❓ How to Use</button>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search Sunflow...">
+    <button onclick="searchSites()">Search</button>
+  </div>
+
+  <div id="results"></div>
+
+  <!-- Add Site Popup -->
+  <div id="addSitePopup" class="popup">
+    <h2>Add a Website</h2>
+    <input type="text" id="title" placeholder="Title">
+    <input type="text" id="url" placeholder="https://example.com">
+    <input type="text" id="description" placeholder="Description">
+    <button onclick="addSite()">Submit</button>
+    <button onclick="closePopup('addSitePopup')">Close</button>
+  </div>
+
+  <!-- Customize Popup -->
+  <div id="settingsPopup" class="popup">
+    <h2>Customize Sunflow</h2>
+    <label>Gradient Start:</label>
+    <input type="color" id="colorStart" value="#6a11cb">
+    <label>Gradient End:</label>
+    <input type="color" id="colorEnd" value="#2575fc">
+    <label>Font:</label>
+    <select id="fontSelect">
+      <option value="'Segoe UI', sans-serif">Segoe UI</option>
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="'Courier New', monospace">Courier New</option>
+      <option value="'Comic Sans MS', cursive">Comic Sans MS</option>
+      <option value="'Roboto', sans-serif">Roboto</option>
+    </select>
+    <label>Background Image:</label>
+    <input type="file" id="bgImage" accept="image/*">
+    <div style="margin-top:10px;">
+      <button onclick="applyCustomTheme()">Apply</button>
+      <button onclick="resetTheme()">Reset</button>
+      <button onclick="closePopup('settingsPopup')">Close</button>
+    </div>
+  </div>
+
+  <!-- Help Popup -->
+  <div id="helpPopup" class="popup">
+    <h2>How to Use Sunflow</h2>
+    <p>🔍 Use the search box to find community-added websites.</p>
+    <p>➕ Click "Add Site" to contribute your own site.</p>
+    <p>⚙️ Customize the look using the "Customize" button.</p>
+    <p>🌸 Enjoy exploring a community-driven web!</p>
+    <button onclick="closePopup('helpPopup')">Got it!</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const SUPABASE_URL = "https://cclfnvwodwyjyngeqgzj.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjbGZudndvZHd5anluZ2VxZ3pqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4OTMwNDQsImV4cCI6MjA3NDQ2OTA0NH0.OUGECpT8ecwnvSTAdiO34bUjMEwi1mHo_pWdsg0hQFk";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Popup controls
+    function openPopup(id) { document.getElementById(id).style.display = "block"; }
+    function closePopup(id) { document.getElementById(id).style.display = "none"; }
+
+    // Add site
+    async function addSite() {
+      const title = document.getElementById("title").value;
+      const url = document.getElementById("url").value;
+      const description = document.getElementById("description").value;
+
+      if(!title||!url){ alert("❌ Title and URL required"); return; }
+
+      const { error } = await supabaseClient.from("websites").insert([{ title, url, description }]);
+      if(error){ alert("❌ " + error.message); }
+      else { alert("✅ Site added!"); closePopup('addSitePopup'); searchSites(); }
+    }
+
+    // Search function
+    async function searchSites() {
+      const term = document.getElementById("searchInput").value.trim();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+      if(!term){ resultsDiv.innerHTML="<p>Enter something to search.</p>"; return; }
+
+      const { data, error } = await supabaseClient
+        .from("websites")
+        .select("*")
+        .or(`title.ilike.%${term}%,description.ilike.%${term}%,url.ilike.%${term}%`)
+        .order('id', {ascending:false});
+
+      if(error){ resultsDiv.innerHTML="<p>❌ "+error.message+"</p>"; }
+      else if(!data || data.length===0){ resultsDiv.innerHTML="<p>No results found 🌑</p>"; }
+      else{
+        data.forEach(site=>{
+          const div=document.createElement("div");
+          div.className="site-entry";
+          div.innerHTML=`<h3><a href="${site.url}" target="_blank">${site.title}</a></h3><p>${site.description||''}</p>`;
+          resultsDiv.appendChild(div);
+        });
+      }
+    }
+
+    // Customization
+    function applyCustomTheme() {
+      const start=document.getElementById("colorStart").value;
+      const end=document.getElementById("colorEnd").value;
+      const font=document.getElementById("fontSelect").value;
+      const bgImageInput=document.getElementById("bgImage");
+
+      document.body.style.background = `linear-gradient(135deg, ${start}, ${end})`;
+      document.body.style.fontFamily = font;
+
+      if(bgImageInput.files && bgImageInput.files[0]){
+        const reader = new FileReader();
+        reader.onload=function(e){
+          document.body.style.backgroundImage=`url(${e.target.result})`;
+          document.body.style.backgroundSize="cover";
+          document.body.style.backgroundRepeat="no-repeat";
+        };
+        reader.readAsDataURL(bgImageInput.files[0]);
+      } else { document.body.style.backgroundImage="none"; }
+
+      localStorage.setItem("sunflowTheme", JSON.stringify({start,end,font,bgImage:bgImageInput.files[0]?URL.createObjectURL(bgImageInput.files[0]):null}));
+      alert("🌸 Theme applied!");
+    }
+
+    function resetTheme() {
+      document.body.style.background="linear-gradient(135deg, #6a11cb, #2575fc)";
+      document.body.style.fontFamily="'Segoe UI', sans-serif";
+      document.body.style.backgroundImage="none";
+      localStorage.removeItem("sunflowTheme");
+      document.getElementById("colorStart").value="#6a11cb";
+      document.getElementById("colorEnd").value="#2575fc";
+      document.getElementById("fontSelect").value="'Segoe UI', sans-serif";
+      document.getElementById("bgImage").value="";
+      alert("🌸 Theme reset to default!");
+    }
+
+    function loadCustomTheme() {
+      const saved=localStorage.getItem("sunflowTheme");
+      if(saved){
+        const theme=JSON.parse(saved);
+        document.body.style.background=`linear-gradient(135deg, ${theme.start}, ${theme.end})`;
+        document.body.style.fontFamily=theme.font;
+        if(theme.bgImage){
+          document.body.style.backgroundImage=`url(${theme.bgImage})`;
+          document.body.style.backgroundSize="cover";
+          document.body.style.backgroundRepeat="no-repeat";
+        }
+        document.getElementById("colorStart").value=theme.start;
+        document.getElementById("colorEnd").value=theme.end;
+        document.getElementById("fontSelect").value=theme.font;
+      }
+    }
+
+    // Auto-search from URL ?q=
+    window.onload = () => {
+      loadCustomTheme();
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q');
+      if(query){ document.getElementById("searchInput").value=query; searchSites(); }
+    };
+
+    // Real-time updates
+    supabaseClient.channel("websites")
+      .on("postgres_changes",{event:"*",schema:"public",table:"websites"},()=>{const term=document.getElementById("searchInput").value; if(term) searchSites();})
+      .subscribe();
+  </script>
 </body>
 </html>
