@@ -12,4 +12,4 @@
 <li>apps some might not work...</li>
 </ol>
 
-<h1>This is now archived, i will no longer be mantaining this and will not make any updates to the OS</h1>
+<h1>This was discontinued, now its continued once more, i will be making updates to this OS whenever i feel like it</h1>
